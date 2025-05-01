@@ -40,8 +40,8 @@ form.addEventListener('submit', function () {
   font-family: 'Courier New', Courier, monospace; /* Monospace for SQL */
   border: 1px solid #ccc;
   border-radius: 5px;
-  height: 700px; /* Editor height */
-  width: 1250px; /* Fixed width for the editor */
+  height: 500px; /* Editor height */
+  width: 800px; /* Fixed width for the editor */
   background-color: #f9f9f9; /* Subtle background color */
   margin-bottom: 15px;
   padding: 5px;
