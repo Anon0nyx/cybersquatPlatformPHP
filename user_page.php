@@ -9,7 +9,7 @@
 	<?php include 'navbar.php'; ?>
 	<main>
 		<h1> PlaceHolder PlaceHolder </h1>
-			<form method="post" id="query-form">
+			<form method="post" id="select-form">
 				<button id="select-button">Select All</button>
 			</form>
 		<div id="results-container" class="hidden" style="margin-bottom: 50px;">
@@ -23,15 +23,10 @@
 
 <!-- some shit dylan found (with bad tabbing) -->
     <script>
-    document.getElementById('query-form').addEventListener('submit', async function (e) {
-        e.preventDefault(); // Prevent default form submission
-
         // Get the query from CodeMirror or textarea
-        // IF form id = select-query ( const query = "SELECT * FROM testing" ) ???
-        //let button = document.querySelector("#query-form button[type='submit']");
-        const queryEditor = document.getElementById('query-editor');
-        const query = queryEditor.value;
-
+  document.getElementById("select-form").addEventListener('submit', async function (e) { 
+	e.preventDefault();
+		const query = "SELECT * FROM testing";
         // Send the query to the server
         try {
             const response = await fetch('query_processor.php', {
@@ -57,5 +52,5 @@
             console.error('Error fetching query results:', err);
             alert('An error occurred while processing your request.');
         }
-    });
+		});
     </script>
