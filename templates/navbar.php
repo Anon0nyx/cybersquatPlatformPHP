@@ -7,6 +7,7 @@ echo '
             <li><a href="../dashboard">Apache Dashboard</a></li>
             <li><a href="../user_pages/user_page.php">User Page</a></li>
 	          <li><a href="../sql_query/sql_query.php">Admin SQL Query</a></li>
+            <li><a href="../user_pages/insert_page.php">Insertion Page</a></li>
         </ul>
     </nav>
 </header>
