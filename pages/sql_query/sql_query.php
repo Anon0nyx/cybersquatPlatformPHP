@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SQL Query Executor</title>
-  <link rel="stylesheet" href="../stylesheets/sql_query.css">
+  <link rel="stylesheet" href="../../stylesheets/sql_query.css">
 
   <!-- CodeMirror Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
@@ -12,7 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/sql/sql.min.js"></script>
 </head>
 <body>
-  <?php include '../templates/navbar.php'; ?>
+  <?php include '../../templates/navbar.php'; ?>
   <main>
     <h1>SQL Query Executor</h1>
 

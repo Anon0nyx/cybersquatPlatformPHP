@@ -5,6 +5,6 @@
     $uri = 'http://';
   }
   $uri .= $_SERVER['HTTP_HOST'];
-  header('Location: '.$uri.'/cybersquatPlatformPHP/sql_query/sql_query.php');
+  header('Location: '.$uri.'/cybersquatPlatformPHP/pages/sql_query/sql_query.php');
   exit;
 ?>

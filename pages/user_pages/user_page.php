@@ -3,10 +3,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>User Interface Page</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../../stylesheets/sql_query.css">
 </head>
 <body>
-	<?php include 'navbar.php'; ?>
+	<?php include '../../templates/navbar.php'; ?>
 	<main>
 		<h1> PlaceHolder PlaceHolder </h1>
 			<form method="post" id="select-form">
@@ -29,7 +29,7 @@
 		const query = "SELECT * FROM testing";
         // Send the query to the server
         try {
-            const response = await fetch('query_processor.php', {
+            const response = await fetch('./sql_query/query_processor.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({ query })

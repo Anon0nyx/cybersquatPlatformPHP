@@ -51,10 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['query'])) {
       }
       $dataHtml .= '</tbody></table>';
       $response['data'] = $dataHtml;
-    } else {
+    } else if ($conn->affected_rows > 0) { // This will tell us if we are using UPDATE/INSERT/DELETE 
       // Non-SELECT query result
       $response['data'] = '<p>Query executed successfully.</p>';
       $response['schema'] = '<p>No schema available for this query.</p>';
+    } else {
+      $response['data'] = '<p>No rows were affected</p>';
+      $response['schema'] = '<p>Broken query</p>';
     }
   } else {
     // Query execution error
