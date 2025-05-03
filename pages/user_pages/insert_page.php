@@ -48,17 +48,29 @@
 // Handle errors
       if (data.error) {
         alert(data.error);
+      } else {
+        alert('Insert Query Successful');
       }
     } catch (err) {
     alert('An error occurred while processing your request.');
     }
-  alert('Insert Query Successful');
-  this.reset();
+    this.reset();
  });
+
+
+/*
+    AGE VALUE RESTRICTION
+      NUMBER ONLY
+*/
   document.getElementById("age_input").addEventListener("input", function(){ 
     age_input.value = age_input.value.replace(/[^0-9]/g, "");
   });
 
+
+/*
+    STATE DROP DOWN
+    CONFIGURATION
+*/
 //THANK YOU CHATGPT I DONT WANT TO WRITE ALL THE STATES
   const states = [
     "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", 
@@ -74,5 +86,4 @@
     option.textContent = state;
     select.appendChild(option);
   });
-
 </script>
