@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'base', 3306, '');
+$conn = new mysqli('localhost', 'root', '', 'cybersquat', 3306, '');
 
 // Check connection
 if ($conn->connect_error) {
