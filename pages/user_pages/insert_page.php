@@ -11,7 +11,20 @@
   <h1> Insert User Data Here </h1>
   <!-- NAVBAR -->
   <?php include '../../templates/navbar.php'; ?>
+  
+  <!-- DropDown for Insert/Update/Delete -->
+  <form id="modify_selection">
+    <select id="query_selection" onchange="toggleInfoPerSelect()">
+       <option value="">Select Query Option</option>
+    </select>
+  </form>
+  
+
+  <!-- Form Input for Query -->
   <form id= "insertForm" method="post">
+    <div id="id_container">
+      <textarea id="id_input" style="display: none;" placeholder="Write ID for selection here"></textarea>
+    </div>
     <div id="name_container">
       <textarea id="name_input" name="name_query" placeholder="Write name here"></textarea>
     </div> 
@@ -25,24 +38,64 @@
     </div>
   <button type="submit" form="insertForm">Submit</button> 
   </form>
+
+
 </body>
 
 <script>
+    /*
+      HANDLE SPECIFIC 
+      FUNCTION;
+      UPDATE/MODIFY/DELETE
+    */
+  const qryVal = document.getElementById('query_selection');
+  const qOptions = ["INSERT", "MODIFY", "DELETE"];
+ 
+  qOptions.forEach(qoption=> {
+    const qSelect = document.createElement('option')
+    qSelect.value = qoption;
+    qSelect.textContent = qoption;
+    qryVal.appendChild(qSelect);
+  });
+ 
+  //Only Display ID_INPUT when needed.
+  //TO DO: Do Not Display NAME/AGE/STATE On Delete Query. Drop Down All Available Ids?
+  function toggleInfoPerSelect() {
+    var selected = document.getElementById("query_selection");
+    var idShow = document.getElementById("id_input");
+    
+    if(selected.value === "MODIFY" || selected.value === "DELETE") {
+      idShow.style.display = "block";
+    } else {
+      idShow.style.display = "none";
+      }
+  }
+
+    
+
+
+
+    /*
+      HANDLE QUERY VALUES
+      SEND TO query_processor.php
+    */
   document.getElementById('insertForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const nameInput = document.getElementById('name_input');
     const ageInput = document.getElementById('age_input');
     const stateInput = document.getElementById('state_input');
+    const crud = document.getElementById('query_selection');
 
+    const crudValue = crud.value;
     const nameValue = nameInput.value;
     const ageValue = ageInput.value;
     const stateValue = stateInput.value;
-    const insert = '1';
+    
     try {
       const response = await fetch('../sql_query/query_processor.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ insert, nameValue, ageValue, stateValue })
+      body: new URLSearchParams({ crudValue, nameValue, ageValue, stateValue })
       });
       const data = await response.json();
 // Handle errors
