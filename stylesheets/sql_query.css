@@ -83,6 +83,28 @@ textarea {
   background-color: #f8f9fc;
   resize: vertical;
 }
+/*Select Dropdown */
+select {
+  width: 220px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #007BFF;
+  border-radius: 5px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  appearance: none; /* Removes default browser styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+
+}
+select option {
+  background-color: #FFFFFF;
+  color: white;
+  font-size: 16px;
+}
 
 textarea:focus {
   outline: none;

@@ -11,11 +11,13 @@ if ($conn->connect_error) {
 $response = ['schema' => '', 'data' => '', 'error' => ''];
 $insert = $_POST['insert'] ?? null;
 $nameValue = $_POST['nameValue'] ?? null;
+$ageValue = $_POST['ageValue'] ?? null;
+$stateValue = $_POST['stateValue'] ?? null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-if (!empty($_POST['insert']) && !empty($_POST['nameValue'])) {
+if (!empty($_POST['insert']) && !empty($_POST['nameValue']) && !empty($_POST['ageValue']) && !empty($_POST['stateValue'])) {
     $nameValue = $conn->real_escape_string($_POST['nameValue']);  // Prevent SQL injection
     $query = "INSERT INTO testing (name, age, state) 
-              VALUES ('$nameValue', 999, 'PLACEHOLDER');";
+              VALUES ('$nameValue', '$ageValue', '$stateValue');";
   $conn->query($query);
 } else if (!empty($_POST['query'])) {
     $query = $_POST['query'];
@@ -24,13 +26,6 @@ if (!empty($_POST['insert']) && !empty($_POST['nameValue'])) {
     if ($result) {
       // Handle SELECT queries that return result sets
       if ($result instanceof mysqli_result) {
-        /*
-           IN HERE WE NEED TO ADD LOGIC TO HANDLE
-           DIFFERENT SQL SERVER RESPONSES - IE
-           INSERTING DATA
-           DELETING DATA
-           UPDATING DATA
-         */
         // Build the schema table
         $schemaHtml = '<table><thead><tr><th>Column</th><th>Type</th><th>Key</th></tr></thead><tbody>';
         foreach ($result->fetch_fields() as $field) {
