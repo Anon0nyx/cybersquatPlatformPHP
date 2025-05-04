@@ -102,7 +102,7 @@ select {
 }
 select option {
   background-color: #FFFFFF;
-  color: white;
+  color: #333;
   font-size: 16px;
 }
 
