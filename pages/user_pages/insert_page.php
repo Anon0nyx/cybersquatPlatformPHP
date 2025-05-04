@@ -48,7 +48,6 @@
       FUNCTION;
       UPDATE/MODIFY/DELETE
     */
-  const qryVal = document.getElementById('query_selection');
   const qOptions = ["INSERT", "MODIFY", "DELETE"];
  
   qOptions.forEach(qoption=> {
