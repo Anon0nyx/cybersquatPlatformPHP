@@ -9,12 +9,12 @@ if ($conn->connect_error) {
 
 // Initialize response array
 $response = ['schema' => '', 'data' => '', 'error' => ''];
-$insert = $_POST['insert'] ?? null;
+$crudValue = $_POST['crudValue'] ?? null;
 $nameValue = $_POST['nameValue'] ?? null;
 $ageValue = $_POST['ageValue'] ?? null;
 $stateValue = $_POST['stateValue'] ?? null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-if (!empty($_POST['insert']) && !empty($_POST['nameValue']) && !empty($_POST['ageValue']) && !empty($_POST['stateValue'])) {
+if ($crudValue === "INSERT" && !empty($_POST['nameValue']) && !empty($_POST['ageValue']) && !empty($_POST['stateValue'])) {
     $nameValue = $conn->real_escape_string($_POST['nameValue']);  // Prevent SQL injection
     $query = "INSERT INTO testing (name, age, state) 
               VALUES ('$nameValue', '$ageValue', '$stateValue');";
@@ -65,9 +65,11 @@ if (!empty($_POST['insert']) && !empty($_POST['nameValue']) && !empty($_POST['ag
       // Query execution error
       $response['error'] = 'Error: ' . htmlspecialchars($conn->error);
     }
-  } else {
-    $response['error'] = 'No query provided!';
-  }
+  } else if (empty($_POST['crudValue'])) {
+      $response['error'] = 'No QUERY OPTION Selected!';
+    } else {
+        $response['error'] = 'No query provided!';
+    }
 }
 
 // Close the database connection
