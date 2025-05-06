@@ -8,10 +8,9 @@
 </head>
 
 <body>
-  <h1> Insert User Data Here </h1>
   <!-- NAVBAR -->
   <?php include '../../templates/navbar.php'; ?>
-  
+  <h1> Insert User Data Here </h1> 
   <!-- DropDown for Insert/Update/Delete -->
   <form id="modify_selection">
     <select id="query_selection" onchange="toggleInfoPerSelect()">
