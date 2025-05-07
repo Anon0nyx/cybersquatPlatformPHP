@@ -9,10 +9,21 @@ if ($conn->connect_error) {
 
 // Initialize response array
 $response = ['schema' => '', 'data' => '', 'error' => ''];
+
+/* TO-DO: Go to default data schema for input, 4 inputs:
+ Input 1: CRUD value/Create, Modify, Delete
+ Input 2: Key/Pair array returning table name and value to CRUD
+ Input 3: "Where" Functions
+*/
 $crudValue = $_POST['crudValue'] ?? null;
 $nameValue = $_POST['nameValue'] ?? null;
 $ageValue = $_POST['ageValue'] ?? null;
 $stateValue = $_POST['stateValue'] ?? null;
+$username = $_POST['un'] ?? null;
+$password = $_POST['pw'] ?? null;
+$email = $_POST['em'] ?? null;
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($crudValue === "INSERT" && !empty($_POST['nameValue']) && !empty($_POST['ageValue']) && !empty($_POST['stateValue'])) {
     $nameValue = $conn->real_escape_string($_POST['nameValue']);  // Prevent SQL injection
@@ -67,9 +78,17 @@ if ($crudValue === "INSERT" && !empty($_POST['nameValue']) && !empty($_POST['age
     }
   } else if (empty($_POST['crudValue'])) {
       $response['error'] = 'No QUERY OPTION Selected!';
-    } else {
-        $response['error'] = 'No query provided!';
-    }
+   
+   //User Creation Query
+  } else if ($_POST['crudValue'] === "newUser" && !empty($_POST['un']) && !empty($_POST['pw']) && !empty($_POST['em'])) {
+      $query = "INSERT INTO credentials
+      VALUES ('$username','$password','$email');
+      INSERT INTO testing (name)
+      VALUES ('$username');";
+   $conn->query($query);
+  } else {
+      $response['error'] = 'No query provided!';
+   }
 }
 
 // Close the database connection
