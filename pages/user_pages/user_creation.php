@@ -8,9 +8,9 @@
 </head>
 
 <body>
-  <h1> User Creation Page </h1>
   <!-- NAVBAR -->
   <?php include '../../templates/navbar.php'; ?>
+  <h1>User Creation Page</h1>
   <!-- Form Input for Query -->
   <form id= "userCreation" method="post">
       <div id="user_container">
