@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <?php include '../../templates/navbar.php'; ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Insertion Page </title>
@@ -10,54 +11,50 @@
 <body>
   <h1> User Creation Page </h1>
   <!-- NAVBAR -->
-  <?php include '../../templates/navbar.php'; ?>
   <!-- Form Input for Query -->
   <form id= "userCreation" method="post">
       <div id="user_container">
-        <textarea id="username" placeholder="Username"></textarea>
+        <textarea id="username" name="username" placeholder="Username"></textarea>
       </div>
       <div id="name_container">
-        <textarea id="password" placeholder="Password"></textarea>
+        <textarea id="password" name="password" placeholder="Password"></textarea>
       </div> 
       <div id="age_container">
-        <textarea id="email" placeholder="Email"></textarea> 
+        <textarea id="email" name="email"  placeholder="Email"></textarea> 
       </div>
       <button type="submit" form="userCreation">Create User</button> 
     </form>
   </body>
+
 <script>
-
-
-//Create submit function to query_processor.php
-  document.getElementById("userCreation").addEventListener('submit', async function (e) {
-  e.preventDefault();
-    const unID = document.getElementById("username");
-    const pwID = document.getElementById("password");
-    const emID = document.getElementById("email");
-    const un = unID.value;
-    const pw = pwID.value;
-    const em = emID.value;
-    const crudValue = "newUser";
-    
-    try {
-      const response = await fetch('../sql_query/query_processor.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ crudValue, un, pw, em })
-      });
-      const data = await response.json();
-
-      if(data.error) {
-        alert(data.error);
-      } else {
-        alert('User Created Successfully');
+//Create: submit: function to new_query.php
+  document.getElementById("userCreation").addEventListener('submit', async function (event) {
+  event.preventDefault();
+    const un = document.getElementById("username").value;
+    const pw = document.getElementById("password").value;
+    const em = document.getElementById("email").value;
+    if(un != "" && pw != "" && em != "") {
+      let pckg = {
+        crud: "VIEW",
+              //table name: value, column1: value, column2: value etc...
+        data: { table: "credentials", username: un, password: pw, email: em },
+        where: false,
+        limit: false
+      };
+      try {
+        const response = await fetch('../sql_query/new_query.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pckg)
+        });
+      } catch(err) {
+          alert('An error occured.');
       }
-    } catch(err) {
-        alert('An error occured.');
-    }
-    this.reset();
+      event.target.reset();
+      alert('Post Submitted');
+    } else {
+      alert('You are missing an input!');
+   }
   });
-
-
-
 </script>
+
