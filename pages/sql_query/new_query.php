@@ -31,9 +31,6 @@ $query =
   VALUES ('{$data['username']}', '{$data['password']}', '{$data['email']}');
   ";
 $srv->query($query);
-if(!$srv->query($query)) {
-  die("Query Failed " . $srv->error);
-}
 
 $srv->close();
 ?>
