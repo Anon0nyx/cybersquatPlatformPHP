@@ -1,18 +1,20 @@
 <?php  
   //Start Server
 $srv = new mySQLi('localhost', 'root', '', 'cybersquat', 3306, '');
-if($server->connect_error) {
-  return();
+if($srv->connect_error) {
+  die("CONNECTION ERROR");
 }
   
   //Collect JSON
 $pckg = json_decode(file_get_contents('php://input'), true);
-  
+if(!$pckg) {
+die("Invalid JSON");
+}
   //Collect values
-$crud = $pckg[crud];
-$data = $pckg[data];
-$where = $pckg[where];
-$limit = $pckg[limit];
+$crud = $pckg['crud'];
+$data = $pckg['data'];
+$where = $pckg['where'];
+$limit = $pckg['limit'];
 $dataKeys = array_keys($data);
 
 /*
@@ -25,10 +27,13 @@ $dataKeys = array_keys($data);
 //JUST MAKE FUNCTIONAL QUERY AHH
 $query =
   "
-  INSERT INTO '$data[0]'('$dataKeys[1]', '$dataKeys[2]', '$dataKeys[3]')
-  VALUES ('$data[1]', '$data[2]', '$data[3]')
+  INSERT INTO `{$data['table']}`(`{$dataKeys[1]}`, `{$dataKeys[2]}`, `{$dataKeys[3]}`)
+  VALUES ('{$data['username']}', '{$data['password']}', '{$data['email']}');
   ";
-$srv->conn($query);
+$srv->query($query);
+if(!$srv->query($query)) {
+  die("Query Failed " . $srv->error);
+}
 
 $srv->close();
 ?>

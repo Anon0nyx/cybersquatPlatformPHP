@@ -33,7 +33,7 @@
     const em = document.getElementById("email").value;
     if(un != "" && pw != "" && em != "") {
       let pckg = {
-        crud: "VIEW",
+        crud: "INSERT",
               //table name: value, column1: value, column2: value etc...
         data: { table: "credentials", username: un, password: pw, email: em },
         where: false,
