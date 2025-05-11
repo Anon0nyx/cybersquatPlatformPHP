@@ -80,12 +80,14 @@ if ($crudValue === "INSERT" && !empty($_POST['nameValue']) && !empty($_POST['age
       $response['error'] = 'No QUERY OPTION Selected!';
    
    //User Creation Query
-  } else if ($_POST['crudValue'] === "newUser" && !empty($_POST['un']) && !empty($_POST['pw']) && !empty($_POST['em'])) {
-      $query = "INSERT INTO credentials
-      VALUES ('$username','$password','$email');
-      INSERT INTO testing (name)
-      VALUES ('$username');";
-   $conn->query($query);
+  } else if ($_POST['crudValue'] === "newUser" && !empty($_POST['un']) && !empty($_POST['pw']) && !empty($_POST['em'])) { 
+      /*
+      $query = "INSERT INTO credentials(username,password,email)
+      VALUES ('$username','$password','$email');";
+      $query2 = "INSERT INTO testing(id, name) VALUES('$username');";
+      $conn->query($query);
+      */
+      $response['error'] = 'query no work';
   } else {
       $response['error'] = 'No query provided!';
    }

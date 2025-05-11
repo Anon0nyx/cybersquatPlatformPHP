@@ -11,6 +11,9 @@ echo '
             <li><a href="../user_pages/user_creation.php">User Creation page</a></li>
         </ul>
     </nav>
+      <body>
+      <!-- Add Luck --> <script src="https://absurd.website/lucky-cat/luckycat.js"></script>
+      </body>
 </header>
 ';
 ?>
