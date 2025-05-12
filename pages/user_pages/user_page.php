@@ -26,13 +26,17 @@
       // Get the query from CodeMirror or textarea
       document.getElementById("select-form").addEventListener('submit', async function (e) { 
 	    e.preventDefault();
-		  const query = "SELECT * FROM testing";
+		  const val = "001100110";
+      let pckg = {
+        crud: val
+      };
+      
       // Send the query to the server
       try {
-        const response = await fetch('../sql_query/query_processor.php', {
+        const response = await fetch('../sql_query/new_query.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({ query })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(pckg)
         });
 
         const data = await response.json();
