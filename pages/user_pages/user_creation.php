@@ -10,49 +10,17 @@
 
 <body>
   <!-- Form Input for Query -->
-  <form id= "userCreation" method="post">
+  <form action="../sql_query/new_query.php" id="userCreation" method="POST">
       <div id="user_container">
-        <textarea id="username" name="username" placeholder="Username"></textarea>
+        <textarea type="text" id="username" name="username" placeholder="Username: No Spaces"></textarea>
       </div>
       <div id="name_container">
-        <textarea id="password" name="password" placeholder="Password"></textarea>
+        <textarea type="password" name="password" placeholder="Password"></textarea>
       </div> 
       <div id="age_container">
-        <textarea id="email" name="email"  placeholder="Email"></textarea> 
+        <textarea type="email" name="email"  placeholder="Email: Valid Format"></textarea> 
       </div>
-      <button type="submit" form="userCreation">Create User</button> 
+      <button type="submit" form="userCreation" name="create-user" value="TESTVALUE">Create User</button> 
     </form>
   </body>
-
-<script>
-//Create: submit: function to new_query.php
-  document.getElementById("userCreation").addEventListener('submit', async function (event) {
-  event.preventDefault();
-    const un = document.getElementById("username").value;
-    const pw = document.getElementById("password").value;
-    const em = document.getElementById("email").value;
-    if(un != "" && pw != "" && em != "") {
-      let pckg = {
-        crud: "00100101",
-              //table name: value, column1: value, column2: value etc...
-        data: { table: "credentials", username: un, password: pw, email: em },
-        where: false,
-        limit: false
-      };
-      try {
-        const response = await fetch('../sql_query/new_query.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(pckg)
-        });
-      } catch(err) {
-          alert('An error occured.');
-      }
-      event.target.reset();
-      alert('Post Submitted');
-    } else {
-      alert('You are missing an input!');
-   }
-  });
-</script>
 
