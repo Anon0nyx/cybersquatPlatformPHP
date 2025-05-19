@@ -4,33 +4,27 @@ $srv = new mySQLi('localhost', 'root', '', 'cybersquat', 3306, '');
 if($srv->connect_error) {
   die("CONNECTION ERROR");
 }
-  
-  //Collect JSON
-$pckg = json_decode(file_get_contents('php://input'), true);
-if(!$pckg) {
-die("Invalid JSON");
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+//Which form?
+  if(isset($_POST['create-user'])) {
+    $un = $_POST['username'];
+    $pw = $_POST['password'];
+    $em = $_POST['email'];
+    if(filter_var($em, FILTER_SANITIZE_EMAIL) && !preg_match("/\\s/",$un) && !empty($pw)) {
+      $q = "INSERT INTO credentials (username, password, email) VALUES ('" . $un . "','" . $pw . "','" . $em . "');";
+      $q2 = "INSERT INTO testing (name, age, state) VALUES ('" . $un . "', 999, 'PlcHld');";
+      $srv->query($q);
+      $srv->query($q2);
+      //Add landing page and session cookies validating login
+      
+      header('Location: ../user_pages/user_page.php');
+    } else {
+      //Placeholder fix for invalid inputs. Javascript would handle these more dynamically..
+      header('Location: ../user_pages/user_creation.php');
+      }
+  } elseif(isset($_POST['select-button'])) {
+      header('Location: ../user_pages/user_page.php');
+  }
 }
-  //Collect values
-$crud = $pckg['crud'];
-$data = $pckg['data'];
-$where = $pckg['where'];
-$limit = $pckg['limit'];
-$dataKeys = array_keys($data);
-
-/*
-    TO DO:
-    MODULAR TABLE INPUTS,
-    FOR EVERY DATA KEY MINUS THE FIRST (TABLE NAME),
-    ADD COLUMN VALUES USING ARRAY_KEYS TO FIND COLUMN NAME
-*/
-
-//JUST MAKE FUNCTIONAL QUERY AHH
-$query =
-  "
-  INSERT INTO `{$data['table']}`(`{$dataKeys[1]}`, `{$dataKeys[2]}`, `{$dataKeys[3]}`)
-  VALUES ('{$data['username']}', '{$data['password']}', '{$data['email']}');
-  ";
-$srv->query($query);
-
 $srv->close();
 ?>
