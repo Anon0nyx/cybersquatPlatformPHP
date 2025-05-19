@@ -16,11 +16,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       $srv->query($q);
       $srv->query($q2);
       //Add landing page and session cookies validating login
+      
       header('Location: ../user_pages/user_page.php');
     } else {
       //Placeholder fix for invalid inputs. Javascript would handle these more dynamically..
       header('Location: ../user_pages/user_creation.php');
       }
+  } elseif(isset($_POST['select-button'])) {
+      header('Location: ../user_pages/user_page.php');
   }
 }
 $srv->close();
