@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php include '../../templates/session_check.php'; ?>
+<?php
+  //Base session template + cookies needed:
+  include '../../templates/session_check.php';
+?>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +17,26 @@
 				<button name="select-button">Select All</button>
 			</form>
 		<div id="results-container" class="hidden" style="margin-bottom: 50px;">
-			<h2> Results </h2>
+		<h2> Results </h2> 
 			<div id="table-schema"></div>
-			<div id="table-data"></div>
+			  <table>
+          <?php 
+            if(isset($_SESSION['query-results']) && is_array($_SESSION['query-results'])) {
+              $qRes = $_SESSION['query-results'];
+              foreach ($qRes as $sRes) {
+                foreach($sRes as $key => $value) {
+                  echo '<thead>';
+                  echo '<th>' . htmlspecialchars($key) . '</th>';
+                  echo '</thead>';
+                  echo '<td>' . htmlspecialchars($value) . '</td>';
+                }
+              }
+            } else {
+                echo '<h1> No Results </h1>';
+            }
+          ?>
+        </table>
+      <div id="table-data"></div>
 		</div>
 	</main>
 </body>
