@@ -23,16 +23,18 @@
           <?php 
             if(isset($_SESSION['query-results']) && is_array($_SESSION['query-results'])) {
               $qRes = $_SESSION['query-results'];
-              foreach ($qRes as $sRes) {
-                foreach($sRes as $key => $value) {
-                  echo '<thead>';
-                  echo '<th>' . htmlspecialchars($key) . '</th>';
-                  echo '</thead>';
-                  echo '<td>' . htmlspecialchars($value) . '</td>';
+                foreach($qRes as $key => $value) {
+                  echo '<tr>';
+                  echo '';
+                  echo '</tr>';
+                  foreach($value as $key2 => $value2) {
+                      echo '<th>' . $key2 . '</th>';
+                      echo '<td>' . $value2 . '</td>';
+                  }
                 }
-              }
             } else {
-                echo '<h1> No Results </h1>';
+                echo '<th> Error </th>';
+                echo '<td> No Results </td>';
             }
           ?>
         </table>
