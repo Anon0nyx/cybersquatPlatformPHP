@@ -23,16 +23,28 @@
           <?php 
             if(isset($_SESSION['query-results']) && is_array($_SESSION['query-results'])) {
               $qRes = $_SESSION['query-results'];
-                foreach($qRes as $key => $value) {
-                  echo '<tr>';
-                  echo '';
-                  echo '</tr>';
-                  foreach($value as $key2 => $value2) {
-                      echo '<th>' . $key2 . '</th>';
-                      echo '<td>' . $value2 . '</td>';
+              $hK = null;
+                //Grab Header
+              foreach($qRes as $row) {
+                  //For modularity and time/space complexity
+                if($hK === null || $hK !== $hK) {
+                    //Set and push headers
+                  $hK = array_keys($row);
+                  foreach($hK as $headers) {
+                    echo '<th>' . $headers . '</th>';
                   }
                 }
+              }
+              foreach($qRes as $row) {
+                  //New row per query row
+                echo '<tr> </tr>';
+                foreach($row as $key => $value) {
+                  //Add cells
+                echo '<td>' . $value . '</td>';
+                }
+              } 
             } else {
+                  //Will also display on first load
                 echo '<th> Error </th>';
                 echo '<td> No Results </td>';
             }
