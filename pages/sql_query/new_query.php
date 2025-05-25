@@ -8,9 +8,9 @@ if($srv->connect_error) {
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 //Which form?
   if(isset($_POST['create-user'])) {
-    $un = $_POST['username'];
-    $pw = $_POST['password'];
-    $em = $_POST['email'];
+    $un = htmlspecialchars($_POST['username']);
+    $pw = htmlspecialchars($_POST['password']);
+    $em = htmlspecialchars($_POST['email']);
     if(filter_var($em, FILTER_SANITIZE_EMAIL) && !preg_match("/\\s/",$un) && !empty($pw)) {
       $q = "INSERT INTO credentials (username, password, email) VALUES ('" . $un . "','" . $pw . "','" . $em . "');";
       $q2 = "INSERT INTO testing (name, age, state) VALUES ('" . $un . "', 999, 'PlcHld');";
