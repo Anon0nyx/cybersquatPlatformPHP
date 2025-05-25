@@ -24,25 +24,21 @@
             if(isset($_SESSION['query-results']) && is_array($_SESSION['query-results'])) {
               $qRes = $_SESSION['query-results'];
               $hK = null;
-                //Grab Header
+                //Grab Headers
               foreach($qRes as $row) {
-                  //For modularity and time/space complexity
                 if($hK === null || $hK !== $hK) {
-                    //Set and push headers
+                    //Set; push headers
                   $hK = array_keys($row);
                   foreach($hK as $headers) {
                     echo '<th>' . htmlspecialchars($headers) . '</th>';
                   }
                 }
-              }
-              foreach($qRes as $row) {
-                  //New row per query row
                 echo '<tr> </tr>';
+                  //Now set; push; each cell
                 foreach($row as $key => $value) {
-                  //Add cells
-                echo '<td>' . htmlspecialchars($value) . '</td>';
+                  echo '<td>' . htmlspecialchars($value) . '</td>';
                 }
-              } 
+              }
             } else {
                   //Will also display on first load
                 echo '<th> Error </th>';
