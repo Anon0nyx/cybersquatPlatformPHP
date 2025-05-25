@@ -31,7 +31,7 @@
                     //Set and push headers
                   $hK = array_keys($row);
                   foreach($hK as $headers) {
-                    echo '<th>' . $headers . '</th>';
+                    echo '<th>' . htmlspecialchars($headers) . '</th>';
                   }
                 }
               }
@@ -40,7 +40,7 @@
                 echo '<tr> </tr>';
                 foreach($row as $key => $value) {
                   //Add cells
-                echo '<td>' . $value . '</td>';
+                echo '<td>' . htmlspecialchars($value) . '</td>';
                 }
               } 
             } else {
