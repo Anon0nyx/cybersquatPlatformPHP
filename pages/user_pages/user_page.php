@@ -24,7 +24,7 @@
             if(isset($_SESSION['query-results']) && is_array($_SESSION['query-results'])) {
               $qRes = $_SESSION['query-results'];
               $hK = null;
-                //Grab Headers
+                //Grab Headers 
               foreach($qRes as $row) {
                 if($hK === null || $hK !== $hK) {
                     //Set; push headers
@@ -42,6 +42,7 @@
             } else {
                   //Will also display on first load
                 echo '<th> Error </th>';
+                echo '<tr> </tr>';
                 echo '<td> No Results </td>';
             }
           ?>

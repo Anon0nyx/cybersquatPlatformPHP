@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       exit();
       }
   } elseif(isset($_POST['select-button'])) {
-      $res = $srv->query("SELECT * FROM credentials");
+      $res = $srv->query("SELECT * FROM credentials RIGHT JOIN testing ON credentials.id = testing.id");
         if($res instanceof mysqli_result) {
           $_SESSION['query-results'] = $res->fetch_all(MYSQLI_ASSOC);
           header('Location: ../user_pages/user_page.php');
