@@ -8,6 +8,7 @@ if(session_status() === PHP_SESSION_NONE) {
    // 'httponly' => true
   ]);
   session_start();
+ //$_SESSION['authorization'] = "not_logged";
 }
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
